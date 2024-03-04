@@ -7,11 +7,25 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "db:gen": "drizzle-kit generate:sqlite",
+    "db:migrate": "npx tsx ./server/database/migrate.ts"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^9.4.3",
+    "drizzle-orm": "^0.29.4",
     "nuxt": "^3.10.3",
+    "pinia": "^2.1.7",
+    "valibot": "^0.29.0",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@pinia/nuxt": "^0.5.1",
+    "@types/bcrypt": "^5.0.2",
+    "@types/better-sqlite3": "^7.6.9",
+    "drizzle-kit": "^0.20.14",
+    "typescript": "^5.3.3"
   }
 }
