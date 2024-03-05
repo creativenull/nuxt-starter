@@ -18,12 +18,11 @@ export default defineEventHandler(async (event) => {
       !userRecord ||
       !(await bcrypt.compare(validated.password, userRecord.password))
     ) {
-      await sendRedirect(
+      return await sendRedirect(
         event,
         `/login?invalid=true&email=${validated.email}&remember=${validated.remember_user}`,
         302,
       );
-      return;
     }
 
     // Create session and login user
@@ -32,6 +31,8 @@ export default defineEventHandler(async (event) => {
     await session.update({ user });
 
     return await sendRedirect(event, "/", 302);
+  } catch (_e) {
+    return await sendRedirect(event, `/login?invalid=true`, 302);
   } finally {
     sqlite.close();
   }

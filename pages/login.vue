@@ -13,10 +13,6 @@ const invalid = ref(!!route.query.invalid ?? false);
         <h1>Sign In</h1>
       </div>
 
-      <div v-show="invalid" class="error__container">
-        Invalid email/password
-      </div>
-
       <form action="/login" method="POST">
         <input
           :value="$route.query.email ?? ''"
@@ -26,8 +22,11 @@ const invalid = ref(!!route.query.invalid ?? false);
           placeholder="Email"
           aria-label="Email"
           autoComplete="email"
+          :aria-invalid="invalid ? true : undefined"
+          aria-describedby="invalid-email"
           required
         />
+        <small v-if="invalid" id="invalid-email">Invalid email/password</small>
         <input
           @input.once="invalid = false"
           name="password"
@@ -35,6 +34,7 @@ const invalid = ref(!!route.query.invalid ?? false);
           placeholder="Password"
           aria-label="Password"
           autoComplete="current-password"
+          :aria-invalid="invalid ? true : undefined"
           required
         />
         <fieldset>
