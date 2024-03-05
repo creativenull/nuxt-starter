@@ -47,12 +47,7 @@ export default defineEventHandler(async (event) => {
         avatarUrl: usersTable.avatarUrl,
       });
 
-    const session = await useSession(event, {
-      password: config.sessionKey,
-      name: "user_token",
-      cookie: { sameSite: "strict" },
-    });
-
+    const session = await getUserSession(event);
     await session.update({ user: newUser.values()[0] });
 
     console.log(session.data.user);

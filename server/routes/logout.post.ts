@@ -7,11 +7,8 @@ type UserSessionData = {
 };
 
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig()
-  const session = await useSession<UserSessionData>(event, {
-    name: "user_token",
-    password: config.sessionKey,
-  });
+  const config = useRuntimeConfig();
+  const session = await getUserSession(event);
 
   await session.clear();
   await sendRedirect(event, "/", 301);

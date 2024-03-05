@@ -26,19 +26,12 @@ export default defineEventHandler(async (event) => {
       return;
     }
 
-    const session = await useSession(event, {
-      password: config.sessionKey,
-      name: "user_token",
-      cookie: { sameSite: "strict" },
-    });
+    const session = await getUserSession(event);
 
     const u = { id: user.id, name: user.name, email: user.email };
     await session.update({
       user: u,
     });
-
-    // const userState = useState("user");
-    // userState.value = u;
 
     await sendRedirect(event, "/", 302);
   } finally {
