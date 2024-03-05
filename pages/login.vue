@@ -1,34 +1,8 @@
 <script setup lang="ts">
-import { FetchError } from "ofetch";
+definePageMeta({ middleware: ["auth"] });
 
-const router = useRouter();
-
-const login = reactive({
-  email: "",
-  password: "",
-  remember: false,
-});
-
-const errors = ref("");
-
-async function onSubmit() {
-  errors.value = "";
-
-  try {
-    await $fetch("/api/login", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: { ...login },
-    });
-
-    router.push("/");
-  } catch (e) {
-    if (e instanceof FetchError) {
-      errors.value = e.data.message;
-      login.password = "";
-    }
-  }
-}
+const route = useRoute();
+const invalid = ref(!!route.query.invalid ?? false);
 </script>
 
 <template>
@@ -39,13 +13,14 @@ async function onSubmit() {
         <h1>Sign In</h1>
       </div>
 
-      <div v-if="errors" class="error__container">
-        {{ errors }}
+      <div v-show="invalid" class="error__container">
+        Invalid email/password
       </div>
 
-      <form @submit.prevent="onSubmit">
+      <form action="/login" method="POST">
         <input
-          v-model="login.email"
+          :value="$route.query.email ?? ''"
+          @input.once="invalid = false"
           name="email"
           type="email"
           placeholder="Email"
@@ -54,7 +29,7 @@ async function onSubmit() {
           required
         />
         <input
-          v-model="login.password"
+          @input.once="invalid = false"
           name="password"
           type="password"
           placeholder="Password"
@@ -63,13 +38,12 @@ async function onSubmit() {
           required
         />
         <fieldset>
-          <label htmlFor="remember">
+          <label htmlFor="remember-me">
             <input
-              v-model="login.remember"
-              name="remember_me"
+              name="remember_user"
               type="checkbox"
               role="switch"
-              id="remember"
+              id="remember-me"
             />
             Remember me
           </label>

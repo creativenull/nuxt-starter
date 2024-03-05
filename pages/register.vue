@@ -1,3 +1,7 @@
+<script setup lang="ts">
+definePageMeta({ middleware: ["auth"] });
+</script>
+
 <template>
   <main>
     <div class="container overflow-auto">
@@ -56,7 +60,9 @@
         <button type="submit">Register</button>
         <hr />
         <div class="auth__container">
-          <a href="/login"> Already a user? Click here to login! </a>
+          <NuxtLink href="/login">
+            Already a user? Click here to login!
+          </NuxtLink>
         </div>
       </form>
     </div>

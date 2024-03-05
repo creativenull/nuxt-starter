@@ -2,7 +2,6 @@ import { eq } from "drizzle-orm";
 import { users as usersTable } from "../database/schema";
 import bcrypt from "bcrypt";
 import { RegisterFormSchema } from "../validators/register";
-import { ValiError } from "valibot";
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
@@ -19,19 +18,18 @@ export default defineEventHandler(async (event) => {
       );
     }
 
-    const checkUser = db
+    const userRecord = db
       .select()
       .from(usersTable)
       .where(eq(usersTable.email, validated.email))
       .get();
 
-    if (checkUser) {
-      await sendRedirect(
+    if (userRecord) {
+      return await sendRedirect(
         event,
         `/register?exists=true&name=${validated.name}`,
         302,
       );
-      return;
     }
 
     const { confirm_password: _, ...userAttrs } = validated;
@@ -45,14 +43,13 @@ export default defineEventHandler(async (event) => {
         name: usersTable.name,
         email: usersTable.email,
         avatarUrl: usersTable.avatarUrl,
-      });
+      })
+      .get();
 
     const session = await getUserSession(event);
-    await session.update({ user: newUser.values()[0] });
+    await session.update({ user: newUser });
 
-    console.log(session.data.user);
-
-    await sendRedirect(event, "/", 302);
+    return await sendRedirect(event, "/", 302);
   } finally {
     sqlite.close();
   }

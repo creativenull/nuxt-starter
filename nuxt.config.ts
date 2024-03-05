@@ -18,6 +18,4 @@ export default defineNuxtConfig({
     saltRounds: 0,
     sqliteFilepath: "",
   },
-
-  modules: ["@pinia/nuxt"]
 });
