@@ -30,7 +30,7 @@ definePageMeta({ middleware: ["auth"] });
           aria-describedby="email-exists"
           required
         />
-        <small id="email-exists">
+        <small v-if="$route.query.exists" id="email-exists">
           User with this email already exists
         </small>
 
