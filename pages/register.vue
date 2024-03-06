@@ -10,10 +10,6 @@ definePageMeta({ middleware: ["auth"] });
         <h1>Register</h1>
       </div>
 
-      <div v-if="$route.query.exists" class="error__container">
-        User already registered
-      </div>
-
       <form method="POST">
         <input
           type="text"
@@ -30,12 +26,13 @@ definePageMeta({ middleware: ["auth"] });
           aria-label="Email"
           autoComplete="email"
           :value="$route.query.email ?? ''"
+          :aria-invalid="$route.query.exists ? true : undefined"
+          aria-describedby="email-exists"
           required
         />
-
-        <div v-if="$route.query.password_mismatch" class="error__container">
-          Password did not match
-        </div>
+        <small id="email-exists">
+          User with this email already exists
+        </small>
 
         <input
           type="password"
@@ -43,20 +40,52 @@ definePageMeta({ middleware: ["auth"] });
           placeholder="Password"
           aria-label="Password"
           autoComplete="current-password"
+          :aria-invalid="
+            $route.query.password_mismatch || $route.query.validation_failed
+              ? true
+              : undefined
+          "
+          aria-describedby="invalid-password"
           required
         />
 
-        <div v-if="$route.query.password_mismatch" class="error__container">
-          Password did not match
-        </div>
+        <small v-if="$route.query.password_mismatch" id="invalid-password">
+          Passwords mismatch
+        </small>
+        <small
+          v-else-if="$route.query.validation_failed && $route.query.reason"
+          id="invalid-password"
+        >
+          {{ $route.query.reason }}
+        </small>
 
         <input
           type="password"
           name="confirm_password"
           placeholder="Confirm Password"
           aria-label="Confirm Password"
+          :aria-invalid="
+            $route.query.password_mismatch || $route.query.validation_failed
+              ? true
+              : undefined
+          "
           required
+          aria-describedby="invalid-confirm-password"
         />
+
+        <small
+          v-if="$route.query.password_mismatch"
+          id="invalid-confirm-password"
+        >
+          Passwords mismatch
+        </small>
+        <small
+          v-else-if="$route.query.validation_failed && $route.query.reason"
+          id="invalid-confirm-password"
+        >
+          {{ $route.query.reason }}
+        </small>
+
         <button type="submit">Register</button>
         <hr />
         <div class="auth__container">
