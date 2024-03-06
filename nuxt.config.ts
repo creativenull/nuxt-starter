@@ -9,11 +9,18 @@ export default defineNuxtConfig({
           rel: "stylesheet",
           href: "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css",
         },
+        {
+          rel: "stylesheet",
+          href: "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css",
+        },
       ],
     },
   },
 
   runtimeConfig: {
+    public: {
+      appName: "",
+    },
     sessionKey: "",
     saltRounds: 0,
     sqliteFilepath: "",
