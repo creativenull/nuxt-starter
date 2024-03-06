@@ -3,28 +3,31 @@ const user = await useAuthUser();
 </script>
 
 <template>
-  <h1>Hello World</h1>
+  <AppHeader />
 
-  <div v-if="user">
-    <span style="display: block">{{ user?.name }}</span>
-    <span style="display: block">{{ user?.email }}</span>
-  </div>
-
-  <div v-if="!user" class="link">
-    <NuxtLink href="/login">Login</NuxtLink>
-    <NuxtLink href="/register">Register</NuxtLink>
-  </div>
-
-  <div v-else>
-    <form action="/logout" method="POST">
-      <button>Logout</button>
-    </form>
-  </div>
+  <main>
+    <div class="intro">
+      <img width="100" height="100" src="/logo.svg" alt="Company Logo" />
+      <h1>{{ $config.public.appName }}</h1>
+    </div>
+  </main>
 </template>
 
 <style scoped>
 .link {
   display: flex;
   gap: 0.5rem;
+}
+
+main {
+  height: calc(100vh - 80px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro {
+  text-align: center;
 }
 </style>
