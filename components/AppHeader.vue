@@ -18,8 +18,7 @@ const user = await useAuthUser();
     </div>
 
     <div v-if="!user" class="user-links">
-      <NuxtLink class="contrast" href="/login">Login</NuxtLink>
-      <NuxtLink class="contrast" href="/register">Register</NuxtLink>
+      <NuxtLink class="contrast" href="/login">Login/Register</NuxtLink>
     </div>
 
     <div v-else class="user-links">
@@ -58,6 +57,10 @@ header {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+}
+
+.user-links a {
+  font-size: 0.75rem;
 }
 
 .user-links button {
