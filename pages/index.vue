@@ -1,7 +1,3 @@
-<script setup lang="ts">
-const user = await useAuthUser();
-</script>
-
 <template>
   <AppHeader />
 

@@ -9,6 +9,7 @@ import {
 } from "valibot";
 
 export const LoginFormSchema = object({
+  __csrf: string(),
   email: string([email()]),
   password: string([minLength(8)]),
   remember_user: coerce(boolean(), Boolean),

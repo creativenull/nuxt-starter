@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({ middleware: ["auth"] });
 
+const res = await useFetch("/api/csrf-token", { method: "POST" });
 const route = useRoute();
 const invalid = ref(!!route.query.invalid ?? false);
 </script>
@@ -14,6 +15,7 @@ const invalid = ref(!!route.query.invalid ?? false);
       </div>
 
       <form action="/login" method="POST">
+        <FormInputCsrf />
         <input
           :value="$route.query.email ?? ''"
           @input.once="invalid = false"

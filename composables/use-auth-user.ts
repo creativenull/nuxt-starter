@@ -1,4 +1,4 @@
 export async function useAuthUser() {
-  const user = await useFetch("/api/user", { method: "POST" });
-  return user.data.value;
+  const res = await useFetch("/api/user", { method: "POST" });
+  return res.data.value;
 }

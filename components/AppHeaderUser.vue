@@ -28,6 +28,7 @@ const show = ref(false);
         <a href="#">Services</a>
         <hr />
         <form action="/logout" method="POST">
+          <FormInputCsrf />
           <button>Logout</button>
         </form>
       </div>
@@ -55,7 +56,6 @@ const show = ref(false);
   width: 250px;
   background-color: var(--pico-color-slate-950);
   border: 1px solid var(--pico-color-slate-850);
-  /* border-radius: 0.25rem; */
 }
 
 .menu-user-info {
@@ -69,11 +69,10 @@ const show = ref(false);
 }
 
 .menu-items button {
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.75rem;
   margin: 0;
   width: 100%;
   display: flex;
   border: none;
-  color: var(--pico-color-slate-100);
 }
 </style>

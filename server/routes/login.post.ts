@@ -2,12 +2,19 @@ import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { users as usersTable } from "../database/schema";
 import { LoginFormSchema } from "../validators/login";
+import useCsrf from "../utils/csrf";
 
 export default defineEventHandler(async (event) => {
   const { sqlite, db } = useDatabase();
+  const session = await getUserSession(event);
 
   try {
     const validated = await useValidator(event, LoginFormSchema);
+
+    if (validated.__csrf !== session.data.csrfToken) {
+      throw createError({ statusCode: 403, statusMessage: "Forbidden" });
+    }
+
     const userRecord = db
       .select()
       .from(usersTable)
@@ -26,9 +33,9 @@ export default defineEventHandler(async (event) => {
     }
 
     // Create session and login user
-    const session = await getUserSession(event);
+    const csrfToken = useCsrf();
     const { password: _, createdAt: __, ...user } = userRecord;
-    await session.update({ user });
+    await session.update({ user, csrfToken });
 
     return await sendRedirect(event, "/", 302);
   } catch (_e) {

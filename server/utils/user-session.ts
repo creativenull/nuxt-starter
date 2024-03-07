@@ -7,6 +7,7 @@ type UserSessionData = {
     email: string;
     avatarUrl: string | null;
   };
+  csrfToken: string;
 };
 
 export async function getUserSession(event: H3Event<EventHandlerRequest>) {
@@ -14,7 +15,7 @@ export async function getUserSession(event: H3Event<EventHandlerRequest>) {
 
   return await useSession<UserSessionData>(event, {
     password: config.sessionKey,
-    name: "__user",
+    name: "__session",
     maxAge: 3600,
     cookie: { sameSite: "strict" },
   });

@@ -3,14 +3,20 @@ import { users as usersTable } from "../database/schema";
 import bcrypt from "bcrypt";
 import { RegisterFormSchema } from "../validators/register";
 import { ValiError } from "valibot";
+import useCsrf from "../utils/csrf";
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const { sqlite, db } = useDatabase();
   const formDataPromise = readFormData(event);
+  const session = await getUserSession(event);
 
   try {
     const validated = await useValidator(event, RegisterFormSchema);
+
+    if (validated.__csrf !== session.data.csrfToken) {
+      throw createError({ statusCode: 403, statusMessage: "Forbidden" });
+    }
 
     if (validated.password !== validated.confirm_password) {
       return await sendRedirect(
@@ -46,8 +52,9 @@ export default defineEventHandler(async (event) => {
       })
       .get();
 
-    const session = await getUserSession(event);
-    await session.update({ user: newUser });
+    // Create session and login user
+    const csrfToken = useCsrf();
+    await session.update({ user: newUser, csrfToken });
 
     return await sendRedirect(event, "/");
   } catch (e) {
