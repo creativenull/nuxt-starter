@@ -22,9 +22,7 @@ const user = await useAuthUser();
     </div>
 
     <div v-else class="user-links">
-      <form action="/logout" method="POST">
-        <button class="contrast">Logout</button>
-      </form>
+      <AppHeaderUser :user />
     </div>
   </header>
 </template>
