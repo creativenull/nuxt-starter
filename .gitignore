@@ -25,3 +25,6 @@ logs
 
 # editor
 .vimrc*
+
+# db
+server/database/db.sqlite
