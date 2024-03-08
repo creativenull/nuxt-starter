@@ -1,7 +1,5 @@
 <script setup lang="ts">
-const { data } = await useFetch("/api/csrf-token", {
-  method: "POST",
-});
+const { data } = await useFetch("/api/csrf-token", { method: "POST" });
 </script>
 
 <template>
