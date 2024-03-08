@@ -10,7 +10,8 @@ definePageMeta({ middleware: ["auth"] });
         <h1>Register</h1>
       </div>
 
-      <form method="POST">
+      <form action="/register" method="POST">
+        <FormInputCsrf />
         <input
           type="text"
           name="name"
