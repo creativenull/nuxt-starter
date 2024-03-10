@@ -1,7 +1,6 @@
 <script setup lang="ts">
 definePageMeta({ middleware: ["auth"] });
 
-const res = await useFetch("/api/csrf-token", { method: "POST" });
 const route = useRoute();
 const invalid = ref(!!route.query.invalid ?? false);
 </script>
