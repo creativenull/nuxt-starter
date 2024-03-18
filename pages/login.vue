@@ -9,10 +9,7 @@ const invalid = ref(!!route.query.invalid ?? false);
 <template>
   <main>
     <div class="container overflow-auto">
-      <div class="title__container">
-        <AppLogo />
-        <h1>Sign In</h1>
-      </div>
+      <AuthTitle label="Sign In" />
 
       <form action="/login" method="POST">
         <FormInputCsrf />
@@ -52,7 +49,7 @@ const invalid = ref(!!route.query.invalid ?? false);
         </fieldset>
         <button type="submit">Login</button>
         <hr />
-        <div class="auth__container">
+        <div style="text-align: center">
           <NuxtLink href="/register">
             Not a user? Click here to regiser!
           </NuxtLink>
@@ -78,25 +75,6 @@ main {
   padding: 0.5rem;
   margin: 0.75rem 0;
   border-radius: 0.25rem;
-}
-
-.title__container {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 0;
-  gap: 0.75rem;
-}
-
-.title__container > img {
-  align-self: center;
-}
-
-.title__container > h1 {
-  margin-bottom: 0;
-}
-
-.auth__container {
-  text-align: center;
 }
 
 @media (min-width: 1280px) {

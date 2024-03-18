@@ -6,10 +6,7 @@ definePageMeta({ middleware: ["auth"] });
 <template>
   <main>
     <div class="container overflow-auto">
-      <div class="title__container">
-        <AppLogo />
-        <h1>Register</h1>
-      </div>
+      <AuthTitle label="Register" />
 
       <form action="/register" method="POST">
         <FormInputCsrf />
@@ -90,7 +87,7 @@ definePageMeta({ middleware: ["auth"] });
 
         <button type="submit">Register</button>
         <hr />
-        <div class="auth__container">
+        <div style="text-align: center">
           <NuxtLink href="/login">
             Already a user? Click here to login!
           </NuxtLink>
@@ -117,25 +114,6 @@ main {
   padding: 0.5rem;
   margin: 0.75rem 0;
   border-radius: 0.25rem;
-}
-
-.title__container {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 0;
-  gap: 0.75rem;
-}
-
-.title__container > img {
-  align-self: center;
-}
-
-.title__container > h1 {
-  margin-bottom: 0;
-}
-
-.auth__container {
-  text-align: center;
 }
 
 @media (min-width: 1280px) {
