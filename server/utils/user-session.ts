@@ -16,7 +16,7 @@ export async function getUserSession(event: H3Event<EventHandlerRequest>) {
   return await useSession<UserSessionData>(event, {
     password: config.sessionKey,
     name: "__session",
-    maxAge: 3600,
+    maxAge: 604800, // 1 week
     cookie: { sameSite: "strict" },
   });
 }
