@@ -1,5 +1,6 @@
 <script setup lang="ts">
 definePageMeta({ middleware: ["auth"] });
+useHead({ title: "Login" });
 
 const route = useRoute();
 const invalid = ref(!!route.query.invalid ?? false);
