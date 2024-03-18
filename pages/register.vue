@@ -6,7 +6,7 @@ definePageMeta({ middleware: ["auth"] });
   <main>
     <div class="container overflow-auto">
       <div class="title__container">
-        <img width="40" height="40" src="/logo.svg" alt="Company Logo" />
+        <AppLogo />
         <h1>Register</h1>
       </div>
 

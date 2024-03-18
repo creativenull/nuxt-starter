@@ -3,7 +3,7 @@
 
   <main>
     <div class="intro">
-      <img width="100" height="100" src="/logo.svg" alt="Company Logo" />
+      <AppLogo size="large" />
       <h1>{{ $config.public.appName }}</h1>
     </div>
   </main>

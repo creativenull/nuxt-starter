@@ -9,7 +9,7 @@ const invalid = ref(!!route.query.invalid ?? false);
   <main>
     <div class="container overflow-auto">
       <div class="title__container">
-        <img width="40" height="40" src="/logo.svg" alt="Company Logo" />
+        <AppLogo />
         <h1>Sign In</h1>
       </div>
 

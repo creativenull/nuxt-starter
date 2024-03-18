@@ -6,13 +6,7 @@ const user = await useAuthUser();
   <header>
     <div class="logo">
       <NuxtLink class="logo__a" href="/">
-        <img
-          class="logo__img"
-          width="40"
-          height="40"
-          src="/logo.svg"
-          alt="Company Logo"
-        />
+        <AppLogo />
         <span class="logo__span">{{ $config.public.appName }}</span>
       </NuxtLink>
     </div>
