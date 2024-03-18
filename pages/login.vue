@@ -9,7 +9,7 @@ const invalid = ref(!!route.query.invalid ?? false);
 <template>
   <main>
     <div class="container overflow-auto">
-      <AuthTitle label="Sign In" />
+      <AuthTitle label="Login" />
 
       <form action="/login" method="POST">
         <FormInputCsrf />
