@@ -12,7 +12,7 @@ const show = ref(false);
       <img
         width="50"
         height="50"
-        src="https://i.pravatar.cc/200?u=7"
+        src="https://i.pravatar.cc/200?img=52"
         alt="user profile picture"
       />
     </button>
