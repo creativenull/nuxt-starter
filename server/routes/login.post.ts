@@ -32,6 +32,8 @@ export default defineEventHandler(async (event) => {
       );
     }
 
+    // TODO: Remember me token
+
     // Create session and login user
     const csrfToken = useCsrf();
     const { password: _, createdAt: __, ...user } = userRecord;
