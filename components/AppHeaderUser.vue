@@ -4,6 +4,15 @@ defineProps<{
 }>();
 
 const show = ref(false);
+const formEl = ref<HTMLFormElement>();
+
+function handleSubmit(e: Event) {
+  e.preventDefault();
+
+  if (window.confirm("Are you sure you want to logout?")) {
+    formEl.value?.submit();
+  }
+}
 </script>
 
 <template>
@@ -27,7 +36,7 @@ const show = ref(false);
         <a href="#">Contact</a>
         <a href="#">Services</a>
         <hr />
-        <form action="/logout" method="POST">
+        <form ref="formEl" @submit="handleSubmit" action="/logout" method="POST">
           <FormInputCsrf />
           <button>Logout</button>
         </form>
