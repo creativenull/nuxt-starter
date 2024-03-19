@@ -68,11 +68,24 @@ const show = ref(false);
   width: 100%;
 }
 
-.menu-items button {
+.menu-items > a {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+}
+
+.menu-items form > button {
   padding: 0.25rem 0.75rem;
   margin: 0;
   width: 100%;
   display: flex;
   border: none;
+  background-color: transparent;
+}
+
+.menu-items > a:hover,
+.menu-items form > button:hover {
+  background-color: var(--pico-color-slate-850);
 }
 </style>
