@@ -9,6 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "db:gen": "drizzle-kit generate:sqlite",
+    "db:regen": "rm -rf ./server/database/migrations && drizzle-kit generate:sqlite",
     "db:migrate": "npx tsx ./server/database/migrate.ts"
   },
   "dependencies": {
