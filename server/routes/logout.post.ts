@@ -1,15 +1,31 @@
+import { deleteUserSession } from "../repositories/user-session";
+import { deleteRememeberMeCookie } from "../utils/remember-me-session";
+
 export default defineEventHandler(async (event) => {
-  const formData = await readFormData(event);
-
-  if (!(formData.get("__csrf") ?? null)) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Invalid token provided",
-    });
-  }
-
+  const { sqlite, db } = useDatabase();
   const session = await getUserSession(event);
-  await session.clear();
+  const formData = await readFormData(event);
+  const rememberMeCookie = getCookie(event, "__remember_me");
 
-  return await sendRedirect(event, "/");
+  try {
+    const __csrf = formData.get("__csrf") ?? "";
+
+    if (!__csrf || __csrf !== session.data.csrfToken) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: "Invalid token provided",
+      });
+    }
+
+    if (rememberMeCookie) {
+      deleteRememeberMeCookie(event);
+      await deleteUserSession(db, session.data.user.id);
+    }
+
+    await session.clear();
+
+    return await sendRedirect(event, "/");
+  } finally {
+    sqlite.close();
+  }
 });

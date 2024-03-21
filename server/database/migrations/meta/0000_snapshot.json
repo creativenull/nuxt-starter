@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "822ca302-de50-47ac-b4c2-b4d2ea64eaa0",
+  "id": "d907ef31-2e82-4d07-88e8-d57bacd11b01",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "user_sessions": {
@@ -14,18 +14,18 @@
           "notNull": true,
           "autoincrement": true
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "token": {
-          "name": "token",
+        "selector": {
+          "name": "selector",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "validator": {
+          "name": "validator",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "created_at": {
@@ -35,9 +35,31 @@
           "notNull": true,
           "autoincrement": false,
           "default": "(strftime('%s', 'now'))"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "user_sessions_selector_unique": {
+          "name": "user_sessions_selector_unique",
+          "columns": [
+            "selector"
+          ],
+          "isUnique": true
+        },
+        "user_sessions_user_id_unique": {
+          "name": "user_sessions_user_id_unique",
+          "columns": [
+            "user_id"
+          ],
+          "isUnique": true
+        }
+      },
       "foreignKeys": {
         "user_sessions_user_id_users_id_fk": {
           "name": "user_sessions_user_id_users_id_fk",

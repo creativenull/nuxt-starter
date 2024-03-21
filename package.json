@@ -17,6 +17,7 @@
     "better-sqlite3": "^9.4.3",
     "drizzle-orm": "^0.29.4",
     "nuxt": "^3.10.3",
+    "ulidx": "^2.3.0",
     "valibot": "^0.29.0",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"

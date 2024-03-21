@@ -14,11 +14,15 @@ export const users = sqliteTable("users", {
 
 export const user_sessions = sqliteTable("user_sessions", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  userId: integer("user_id")
-    .notNull()
-    .references(() => users.id),
-  token: text("token").notNull(),
+  selector: text("selector").unique(),
+  validator: text("validator"),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(strftime('%s', 'now'))`),
+
+  // Relationships
+  userId: integer("user_id")
+    .unique()
+    .notNull()
+    .references(() => users.id),
 });

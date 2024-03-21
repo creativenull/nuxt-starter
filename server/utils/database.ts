@@ -1,8 +1,10 @@
-import { drizzle } from "drizzle-orm/better-sqlite3";
+import { BetterSQLite3Database, drizzle } from "drizzle-orm/better-sqlite3";
 import * as schema from "../database/schema";
 import Database from "better-sqlite3";
 
-export function useDatabase() {
+export type AppDatabase = BetterSQLite3Database<typeof schema>
+
+export function useDatabase(): { sqlite: Database.Database, db: AppDatabase } {
   const config = useRuntimeConfig();
   const sqlite = new Database(config.sqliteFilepath);
 
