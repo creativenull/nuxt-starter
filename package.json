@@ -16,7 +16,6 @@
     "bcrypt": "^5.1.1",
     "better-sqlite3": "^9.4.3",
     "drizzle-orm": "^0.29.4",
-    "nuxt": "^3.10.3",
     "ulidx": "^2.3.0",
     "valibot": "^0.29.0",
     "vue": "^3.4.19",
@@ -26,6 +25,8 @@
     "@types/bcrypt": "^5.0.2",
     "@types/better-sqlite3": "^7.6.9",
     "drizzle-kit": "^0.20.14",
-    "typescript": "^5.3.3"
+    "nuxt": "^3.11.1",
+    "typescript": "^5.4.3",
+    "vue-tsc": "^1.8.27"
   }
 }
