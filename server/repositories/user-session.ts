@@ -1,6 +1,6 @@
 import { ulid } from "ulidx";
 import { randomBytes, createHash } from "crypto";
-import { AppDatabase } from "../utils/database";
+import { type AppDatabase } from "../utils/database";
 import { user_sessions as userSessionsTable } from "../database/schema";
 import { sql } from "drizzle-orm";
 
@@ -30,7 +30,10 @@ export async function createUserSession(
   return { selector, validator };
 }
 
-export async function deleteUserSession(db: AppDatabase, userId: number): Promise<void> {
+export async function deleteUserSession(
+  db: AppDatabase,
+  userId: number,
+): Promise<void> {
   await db
     .delete(userSessionsTable)
     .where(sql`${userSessionsTable.userId} = ${userId}`);

@@ -1,5 +1,5 @@
 import type { H3Event, EventHandlerRequest } from "h3";
-import { BaseSchema, parseAsync } from "valibot";
+import { type BaseSchema, parseAsync } from "valibot";
 
 export async function useValidator<T extends BaseSchema>(
   event: H3Event<EventHandlerRequest>,
