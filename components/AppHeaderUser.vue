@@ -36,7 +36,12 @@ function handleSubmit(e: Event) {
         <a href="#">Contact</a>
         <a href="#">Services</a>
         <hr />
-        <form ref="formEl" @submit="handleSubmit" action="/logout" method="POST">
+        <form
+          ref="formEl"
+          @submit="handleSubmit"
+          action="/logout"
+          method="POST"
+        >
           <FormInputCsrf />
           <button>Logout</button>
         </form>
