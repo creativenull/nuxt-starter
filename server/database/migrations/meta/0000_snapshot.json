@@ -1,7 +1,7 @@
 {
-  "version": "5",
+  "version": "6",
   "dialect": "sqlite",
-  "id": "d907ef31-2e82-4d07-88e8-d57bacd11b01",
+  "id": "1302a72e-a4ce-49cd-89ce-19cea58b9498",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "user_sessions": {
@@ -144,5 +144,8 @@
     "schemas": {},
     "tables": {},
     "columns": {}
+  },
+  "internal": {
+    "indexes": {}
   }
 }
