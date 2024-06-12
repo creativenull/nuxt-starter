@@ -30,11 +30,6 @@ export async function createUserSession(
   return { selector, validator };
 }
 
-export async function deleteUserSession(
-  db: AppDatabase,
-  userId: number,
-): Promise<void> {
-  await db
-    .delete(userSessionsTable)
-    .where(sql`${userSessionsTable.userId} = ${userId}`);
+export async function deleteUserSession(db: AppDatabase, userId: number): Promise<void> {
+  await db.delete(userSessionsTable).where(sql`${userSessionsTable.userId} = ${userId}`);
 }

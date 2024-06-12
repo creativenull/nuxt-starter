@@ -23,10 +23,7 @@ export default defineEventHandler(async (event) => {
       .where(eq(usersTable.email, validated.email))
       .get();
 
-    if (
-      !userRecord ||
-      !(await bcrypt.compare(validated.password, userRecord.password))
-    ) {
+    if (!userRecord || !(await bcrypt.compare(validated.password, userRecord.password))) {
       return await sendRedirect(
         event,
         `/login?invalid=true&email=${validated.email}&remember=${validated.remember_user}`,
@@ -36,10 +33,7 @@ export default defineEventHandler(async (event) => {
 
     // TODO: Remember me token
     if (validated.remember_user) {
-      const { selector, validator } = await createUserSession(
-        db,
-        userRecord.id,
-      );
+      const { selector, validator } = await createUserSession(db, userRecord.id);
       setRememeberMeCookie(event, selector, validator);
     }
 

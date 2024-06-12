@@ -12,8 +12,6 @@ export function setRememeberMeCookie(
   });
 }
 
-export function deleteRememeberMeCookie(
-  event: H3Event<EventHandlerRequest>,
-): void {
+export function deleteRememeberMeCookie(event: H3Event<EventHandlerRequest>): void {
   deleteCookie(event, "__remember_me");
 }

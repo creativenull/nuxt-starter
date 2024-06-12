@@ -40,9 +40,7 @@ definePageMeta({ middleware: ["auth"] });
           aria-label="Password"
           autoComplete="current-password"
           :aria-invalid="
-            $route.query.password_mismatch || $route.query.validation_failed
-              ? true
-              : undefined
+            $route.query.password_mismatch || $route.query.validation_failed ? true : undefined
           "
           aria-describedby="invalid-password"
           required
@@ -64,18 +62,13 @@ definePageMeta({ middleware: ["auth"] });
           placeholder="Confirm Password"
           aria-label="Confirm Password"
           :aria-invalid="
-            $route.query.password_mismatch || $route.query.validation_failed
-              ? true
-              : undefined
+            $route.query.password_mismatch || $route.query.validation_failed ? true : undefined
           "
           required
           aria-describedby="invalid-confirm-password"
         />
 
-        <small
-          v-if="$route.query.password_mismatch"
-          id="invalid-confirm-password"
-        >
+        <small v-if="$route.query.password_mismatch" id="invalid-confirm-password">
           Passwords mismatch
         </small>
         <small
@@ -88,9 +81,7 @@ definePageMeta({ middleware: ["auth"] });
         <button type="submit">Register</button>
         <hr />
         <div style="text-align: center">
-          <NuxtLink href="/login">
-            Already a user? Click here to login!
-          </NuxtLink>
+          <NuxtLink href="/login"> Already a user? Click here to login! </NuxtLink>
         </div>
       </form>
     </div>

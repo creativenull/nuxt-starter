@@ -38,21 +38,14 @@ const invalid = ref(!!route.query.invalid ?? false);
         />
         <fieldset>
           <label htmlFor="remember-me">
-            <input
-              name="remember_user"
-              type="checkbox"
-              role="switch"
-              id="remember-me"
-            />
+            <input name="remember_user" type="checkbox" role="switch" id="remember-me" />
             Remember me
           </label>
         </fieldset>
         <button type="submit">Login</button>
         <hr />
         <div style="text-align: center">
-          <NuxtLink href="/register">
-            Not a user? Click here to regiser!
-          </NuxtLink>
+          <NuxtLink href="/register"> Not a user? Click here to regiser! </NuxtLink>
         </div>
       </form>
     </div>
