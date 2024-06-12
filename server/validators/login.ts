@@ -3,16 +3,17 @@ import {
   string,
   email,
   minLength,
-  boolean,
-  coerce,
-  type Output,
+  pipe,
+  unknown,
+  transform,
+  type InferOutput,
 } from "valibot";
 
 export const LoginFormSchema = object({
   __csrf: string(),
-  email: string([email()]),
-  password: string([minLength(8)]),
-  remember_user: coerce(boolean(), Boolean),
+  email: pipe(string(), email()),
+  password: pipe(string(), minLength(8)),
+  remember_user: pipe(unknown(), transform(Boolean)),
 });
 
-export type LoginFormData = Output<typeof LoginFormSchema>;
+export type LoginFormData = InferOutput<typeof LoginFormSchema>;

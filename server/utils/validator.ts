@@ -1,7 +1,7 @@
 import type { H3Event, EventHandlerRequest } from "h3";
-import { type BaseSchema, parseAsync } from "valibot";
+import { type GenericSchema, parseAsync } from "valibot";
 
-export async function useValidator<T extends BaseSchema>(
+export async function useValidator<T extends GenericSchema>(
   event: H3Event<EventHandlerRequest>,
   schema: T,
 ) {
@@ -9,7 +9,7 @@ export async function useValidator<T extends BaseSchema>(
   return await parseAsync(schema, Object.fromEntries(formData));
 }
 
-export async function useRequestValidator<T extends BaseSchema>(
+export async function useRequestValidator<T extends GenericSchema>(
   event: H3Event<EventHandlerRequest>,
   schema: T,
 ) {

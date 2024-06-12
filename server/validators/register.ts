@@ -1,13 +1,11 @@
-import { object, string, email, minLength, type Output } from "valibot";
+import { object, string, email, minLength, pipe, type InferOutput } from "valibot";
 
 export const RegisterFormSchema = object({
   __csrf: string(),
-  name: string([minLength(1)]),
-  email: string([email()]),
-  password: string([minLength(8, "Password must be at least 8 characters")]),
-  confirm_password: string([
-    minLength(8, "Password must be at least 8 charaters"),
-  ]),
+  name: pipe(string(), minLength(1)),
+  email: pipe(string(), email()),
+  password: pipe(string(), minLength(8, "Password must be at least 8 characters")),
+  confirm_password: pipe(string(), minLength(8, "Password must be at least 8 characters")),
 });
 
-export type RegisterFormData = Output<typeof RegisterFormSchema>;
+export type RegisterFormData = InferOutput<typeof RegisterFormSchema>;
