@@ -1,4 +1,4 @@
-import useCsrf from "~/server/utils/csrf";
+import { useCsrf } from "~/server/utils/useCsrf";
 
 export default defineEventHandler(async (event) => {
   const session = await getUserSession(event);

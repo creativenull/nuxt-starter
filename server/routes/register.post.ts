@@ -1,9 +1,9 @@
-import { eq } from "drizzle-orm";
-import { users as usersTable } from "../database/schema";
 import bcrypt from "bcrypt";
-import { RegisterFormSchema } from "../validators/register";
+import { eq } from "drizzle-orm";
 import { ValiError } from "valibot";
-import useCsrf from "../utils/csrf";
+import { users as usersTable } from "../database/schema";
+import { useCsrf } from "../utils/useCsrf";
+import { RegisterFormSchema } from "../validators/register-form.schema";
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();

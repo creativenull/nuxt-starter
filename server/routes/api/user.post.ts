@@ -1,4 +1,4 @@
-import { getUserSession } from "~/server/utils/user-session";
+import { getUserSession } from "~/server/utils/userSession";
 
 export default defineEventHandler(async (event) => {
   const session = await getUserSession(event);

@@ -1,5 +1,5 @@
-import { deleteUserSession } from "../repositories/user-session";
-import { deleteRememeberMeCookie } from "../utils/remember-me-session";
+import { deleteUserSession } from "../repositories/user-session.repository";
+import { deleteRememeberMeCookie } from "../utils/rememberMeCookie";
 
 export default defineEventHandler(async (event) => {
   const { sqlite, db } = useDatabase();

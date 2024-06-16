@@ -1,6 +1,6 @@
 import { ulid } from "ulidx";
 import { randomBytes, createHash } from "crypto";
-import { type AppDatabase } from "../utils/database";
+import { type AppDatabase } from "../utils/useDatabase";
 import { user_sessions as userSessionsTable } from "../database/schema";
 import { sql } from "drizzle-orm";
 

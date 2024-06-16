@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { users as usersTable } from "../database/schema";
-import { LoginFormSchema } from "../validators/login";
-import useCsrf from "../utils/csrf";
-import { createUserSession } from "../repositories/user-session";
-import { setRememeberMeCookie } from "../utils/remember-me-session";
+import { LoginFormSchema } from "../validators/login-form.schema";
+import { useCsrf } from "../utils/useCsrf";
+import { createUserSession } from "../repositories/user-session.repository";
+import { setRememeberMeCookie } from "../utils/rememberMeCookie";
 
 export default defineEventHandler(async (event) => {
   const { sqlite, db } = useDatabase();
