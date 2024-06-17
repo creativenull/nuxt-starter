@@ -1,4 +1,4 @@
-import { deleteUserSession } from "../repositories/user-session.repository";
+import * as userSessionRepo from "../repositories/user-session.repository";
 import { deleteRememeberMeCookie } from "../utils/rememberMeCookie";
 
 export default defineEventHandler(async (event) => {
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
 
     if (rememberMeCookie) {
       deleteRememeberMeCookie(event);
-      await deleteUserSession(db, session.data.user.id);
+      userSessionRepo.destroyUsingUserId(session.data.user.id);
     }
 
     await session.clear();

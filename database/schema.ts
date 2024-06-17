@@ -10,6 +10,7 @@ export const users = sqliteTable("users", {
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(strftime('%s', 'now'))`),
+  deletedAt: integer("deleted_at", { mode: "timestamp" }).default(sql`NULL`),
 });
 
 export const user_sessions = sqliteTable("user_sessions", {

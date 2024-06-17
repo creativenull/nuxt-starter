@@ -1,35 +1,43 @@
-import { ulid } from "ulidx";
-import { randomBytes, createHash } from "crypto";
-import { type AppDatabase } from "../utils/useDatabase";
-import { user_sessions as userSessionsTable } from "../database/schema";
+import { createHash, randomBytes } from "crypto";
 import { sql } from "drizzle-orm";
+import { ulid } from "ulidx";
+import { user_sessions } from "../../database/schema";
 
-export async function createUserSession(
-  db: AppDatabase,
-  userId: number,
-): Promise<{ selector: string; validator: string }> {
-  const selector = ulid();
-  const validator = randomBytes(64).toString("hex");
-  const hashedValidator = createHash("sha256").update(validator).digest("hex");
+export function destroyUsingUserId(userId: number) {
+  const { sqlite, db } = useDatabase();
 
-  await db
-    .insert(userSessionsTable)
-    .values({
-      selector,
-      validator: hashedValidator,
-      userId,
-    })
-    .onConflictDoUpdate({
-      target: userSessionsTable.userId,
-      set: {
-        selector,
-        validator: hashedValidator,
-      },
-    });
-
-  return { selector, validator };
+  try {
+    db.delete(user_sessions).where(sql`${user_sessions.userId} = ${userId}`);
+  } finally {
+    sqlite.close();
+  }
 }
 
-export async function deleteUserSession(db: AppDatabase, userId: number): Promise<void> {
-  await db.delete(userSessionsTable).where(sql`${userSessionsTable.userId} = ${userId}`);
+export async function createUsingUserId(userId: number) {
+  const { sqlite, db } = useDatabase();
+
+  try {
+    const selector = ulid();
+    const validator = randomBytes(64).toString("hex");
+    const hashedValidator = createHash("sha256").update(validator).digest("hex");
+
+    await db
+      .insert(user_sessions)
+      .values({
+        selector,
+        validator: hashedValidator,
+        userId,
+      })
+      .onConflictDoUpdate({
+        target: user_sessions.userId,
+        set: {
+          selector,
+          validator: hashedValidator,
+        },
+      });
+
+    return { selector, validator };
+  } finally {
+    sqlite.close();
+  }
 }

@@ -11,8 +11,8 @@
     "fmt": "prettier --write .",
     "fmt:check": "prettier --check .",
     "db:gen": "drizzle-kit generate",
-    "db:regen": "rm -rf ./server/database/migrations && drizzle-kit generate",
-    "db:migrate": "npx tsx ./server/database/migrate.ts"
+    "db:regen": "rm -rf ./database/migrations && drizzle-kit generate",
+    "db:migrate": "npx tsx ./database/migrate.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

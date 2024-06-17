@@ -1,13 +1,9 @@
-import bcrypt from "bcrypt";
-import { eq } from "drizzle-orm";
 import { ValiError } from "valibot";
-import { users as usersTable } from "../database/schema";
+import * as userRepo from "../repositories/user.repository";
 import { useCsrf } from "../utils/useCsrf";
 import { RegisterFormSchema } from "../validators/register-form.schema";
 
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig();
-  const { sqlite, db } = useDatabase();
   const formDataPromise = readFormData(event);
   const session = await getUserSession(event);
 
@@ -25,11 +21,7 @@ export default defineEventHandler(async (event) => {
       );
     }
 
-    const userRecord = db
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.email, validated.email))
-      .get();
+    const userRecord = userRepo.getByEmail(validated.email);
 
     if (userRecord) {
       return await sendRedirect(
@@ -38,19 +30,11 @@ export default defineEventHandler(async (event) => {
       );
     }
 
-    const { confirm_password: _, ...userAttrs } = validated;
-    const salt = await bcrypt.genSalt(config.saltRounds);
-    const hashedPassword = await bcrypt.hash(userAttrs.password, salt);
-    const newUser = db
-      .insert(usersTable)
-      .values({ ...userAttrs, password: hashedPassword })
-      .returning({
-        id: usersTable.id,
-        name: usersTable.name,
-        email: usersTable.email,
-        avatarUrl: usersTable.avatarUrl,
-      })
-      .get();
+    const newUser = await userRepo.create({
+      name: validated.name,
+      email: validated.email,
+      password: validated.password,
+    });
 
     // Create session and login user
     const csrfToken = useCsrf();
@@ -66,7 +50,5 @@ export default defineEventHandler(async (event) => {
         `/register?name=${formData.name}&email=${formData.email}&validation_failed=true&reason=${e.message}`,
       );
     }
-  } finally {
-    sqlite.close();
   }
 });
