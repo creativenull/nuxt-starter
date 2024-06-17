@@ -14,5 +14,5 @@ if (filepath === "") {
 const sqlite = new Database(filepath);
 const db = drizzle(sqlite, { schema });
 
-migrate(db, { migrationsFolder: "./server/database/migrations" });
+migrate(db, { migrationsFolder: "./database/migrations" });
 sqlite.close();
