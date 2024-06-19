@@ -65,6 +65,8 @@ export async function getValidatedUserByCredentials(email: string, plainTextPass
     }
 
     return user;
+  } catch (e) {
+    return null;
   } finally {
     sqlite.close();
   }
