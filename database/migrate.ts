@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const filepath: string = process.env.NUXT_SQLITE_FILEPATH ?? "";
+const filepath: string = process.env.NUXT_DB_SQLITE_FILEPATH ?? "";
 if (filepath === "") {
   throw new Error("Invalid filepath for sqlite database");
 }
