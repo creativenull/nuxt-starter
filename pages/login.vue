@@ -38,7 +38,13 @@ const invalid = ref(!!route.query.invalid ?? false);
         />
         <fieldset>
           <label htmlFor="remember-me">
-            <input name="remember_user" type="checkbox" role="switch" id="remember-me" />
+            <input
+              :checked="$route.query.remember_user === 'true' ?? false"
+              name="remember_user"
+              type="checkbox"
+              role="switch"
+              id="remember-me"
+            />
             Remember me
           </label>
         </fieldset>
