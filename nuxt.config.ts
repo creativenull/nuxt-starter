@@ -1,30 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: "2024-12-02",
   devtools: { enabled: true },
-
   typescript: { typeCheck: true },
-
-  app: {
-    head: {
-      link: [
-        {
-          rel: "stylesheet",
-          href: "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css",
-        },
-        {
-          rel: "stylesheet",
-          href: "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css",
-        },
-      ],
-    },
-  },
+  srcDir: "src",
 
   runtimeConfig: {
     public: {
-      appName: "",
+      appName: "Nuxt Starter",
     },
-    sessionKey: "",
-    saltRounds: 0,
-    sqliteFilepath: "",
   },
+
+  modules: ["@nuxt/eslint"],
 });

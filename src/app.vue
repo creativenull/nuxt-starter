@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const appName = useRuntimeConfig().public.appName;
+const appName = useRuntimeConfig().public.appName as string | null;
 
 useHead({
-  titleTemplate: (titleChunk) => {
+  titleTemplate(titleChunk) {
     return titleChunk ? `${titleChunk} - ${appName}` : appName;
   },
 });
