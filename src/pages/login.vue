@@ -11,7 +11,7 @@ async function onSubmit() {
   errorsState.email = [];
 
   try {
-    const resp = await $fetch("/api/login", { method: "POST", body: formState });
+    const resp = await $fetch("/api/auth/login", { method: "POST", body: formState });
 
     console.log({ resp });
   } catch (e) {

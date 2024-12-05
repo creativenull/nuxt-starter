@@ -20,7 +20,7 @@ const handleFetchError = useValibotErrorHandler(errorsState);
 
 async function onSubmit() {
   try {
-    const resp = await $fetch("/api/register", { method: "POST", body: formState });
+    const resp = await $fetch("/api/auth/register", { method: "POST", body: formState });
 
     console.log({ resp });
   } catch (e) {
