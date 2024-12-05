@@ -27,4 +27,4 @@ logs
 .vimrc*
 
 # db
-database/db.sqlite
+storage/db.sqlite
