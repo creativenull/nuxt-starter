@@ -25,6 +25,3 @@ logs
 
 # editor
 .vimrc*
-
-# db
-storage/db.sqlite
