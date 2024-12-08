@@ -12,5 +12,5 @@ export default defineNuxtConfig({
     bcryptSaltRounds: 12,
   },
 
-  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/fonts", "@nuxt/image"],
+  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/fonts", "@nuxt/image", "nuxt-auth-utils"],
 });

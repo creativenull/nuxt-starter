@@ -2,6 +2,4 @@
 useHead({ title: "Register" });
 </script>
 
-<template>
-
-</template>
+<template></template>

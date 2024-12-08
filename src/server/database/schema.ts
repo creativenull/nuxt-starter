@@ -11,4 +11,3 @@ export const users = t.sqliteTable("users", {
   emailVerifiedOn: t.text(),
   ...timestamps,
 });
-
