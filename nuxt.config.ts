@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-12-02",
   devtools: { enabled: true },
-  typescript: { typeCheck: true },
   srcDir: "src/",
 
   runtimeConfig: {
