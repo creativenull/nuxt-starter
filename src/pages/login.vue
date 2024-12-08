@@ -1,43 +1,25 @@
 <script setup lang="ts">
-import { FetchError } from "ofetch";
-
 useHead({ title: "Login" });
 
-const formRef = useTemplateRef("formRef");
 const formState = reactive({ email: "", password: "" });
-const errorsState = reactive<{ email: string[] }>({ email: [] });
 
-async function onSubmit() {
-  errorsState.email = [];
-
-  try {
-    const resp = await $fetch("/api/auth/login", { method: "POST", body: formState });
-
-    console.log({ resp });
-  } catch (e) {
-    if (e instanceof FetchError) {
-      errorsState.email.push("Invalid email/password provided.");
-      formRef.value?.reset();
-    }
-  }
+function onSubmit() {
+  // $fetch("/api/auth/login", { method: "POST", body: formState })
+  //   .then((res) => console.log("response", res))
+  //   .catch((err) => console.log("error", err));
 }
 </script>
 
 <template>
-  <div>
-    <form ref="formRef" @submit.prevent="onSubmit">
-      <label for="email">Email*</label>
-      <div>
-        <input id="email" v-model="formState.email" required />
-        <div v-if="errorsState.email.length > 0">Invalid email/password provided.</div>
-      </div>
+  <UForm :state="formState" class="space-y-4" @submit="onSubmit">
+    <UFormGroup label="Email" name="email">
+      <UInput v-model="formState.email" />
+    </UFormGroup>
 
-      <label for="password">Password*</label>
-      <div>
-        <input id="password" v-model="formState.password" type="password" required />
-      </div>
+    <UFormGroup label="Password" name="password">
+      <UInput v-model="formState.password" type="password" />
+    </UFormGroup>
 
-      <button type="submit">Login</button>
-    </form>
-  </div>
+    <UButton type="submit"> Submit </UButton>
+  </UForm>
 </template>

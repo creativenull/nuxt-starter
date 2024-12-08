@@ -1,14 +1,13 @@
 <script setup lang="ts">
-const appName = useRuntimeConfig().public.appName as string | null;
+const appName = useRuntimeConfig().public.appName ?? "";
+const titleTemplate = (titleChunk: string | undefined): string =>
+  titleChunk ? `${titleChunk} - ${appName}` : appName;
 
-useHead({
-  titleTemplate(titleChunk) {
-    return titleChunk ? `${titleChunk} - ${appName}` : appName;
-  },
-});
+useHead({ titleTemplate });
 </script>
 
 <template>
+  <NuxtRouteAnnouncer />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

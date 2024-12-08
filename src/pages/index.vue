@@ -3,9 +3,8 @@ useHead({ title: "Home" });
 </script>
 
 <template>
-  <main>
-    <div class="intro">
-      <h1>Home</h1>
-    </div>
-  </main>
+  <div class="space-x-2">
+    <UButton color="primary" variant="solid" to="/login"> Login </UButton>
+    <UButton color="primary" variant="solid" to="/register"> Register </UButton>
+  </div>
 </template>
