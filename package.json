@@ -17,6 +17,7 @@
     "bcrypt": "^5.1.1",
     "better-sqlite3": "^11.0.0",
     "drizzle-orm": "^0.36.0",
+    "knex": "^3.1.0",
     "ulidx": "^2.3.0",
     "valibot": "^0.42.1",
     "vue": "^3.4.19",
