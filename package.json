@@ -9,9 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "fmt": "prettier --write .",
-    "fmt:check": "prettier --check .",
-    "db:generate": "drizzle-kit --config drizzle.config.ts generate",
-    "db:migrate": "drizzle-kit --config drizzle.config.ts migrate"
+    "fmt:check": "prettier --check ."
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
