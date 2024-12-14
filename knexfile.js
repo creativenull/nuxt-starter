@@ -2,15 +2,13 @@
  * @type { Object.<string, import("knex").Knex.Config> }
  */
 const config = {
-  development: {
-    client: "better-sqlite3",
-    useNullAsDefault: true,
-    connection: {
-      filename: "./storage/db.sqlite",
-    },
-    migrations: {
-      directory: "./src/server/database/knex/migrations"
-    }
+  client: "better-sqlite3",
+  useNullAsDefault: true,
+  connection: {
+    filename: "./storage/db.sqlite",
+  },
+  migrations: {
+    directory: "./src/server/database/knex/migrations",
   },
 };
 
