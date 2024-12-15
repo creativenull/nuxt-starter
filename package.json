@@ -9,7 +9,9 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "fmt": "prettier --write .",
-    "fmt:check": "prettier --check ."
+    "fmt:check": "prettier --check .",
+    "db:migrate": "npx knex --knexfile src/knexfile.js migrate:latest",
+    "db:make": "npx knex --knexfile src/knexfile.js migrate:make"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -28,7 +30,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/better-sqlite3": "^7.6.9",
     "eslint": "^9.16.0",
-    "nuxt": "^3.11.1",
+    "nuxt": "^3.13.0",
     "nuxt-auth-utils": "^0.5.5",
     "typescript": "^5.7.2"
   },
