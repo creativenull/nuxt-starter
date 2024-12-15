@@ -3,6 +3,7 @@ import { makePassword } from "~/server/services/password";
 
 type User = {
   id: number;
+  pid: string;
   first_name: string;
   last_name: string;
   email: string;
@@ -11,7 +12,9 @@ type User = {
   updated_at: Date;
 };
 
-const allowed = ["id", "first_name", "last_name", "email", "created_at", "updated_at"];
+const allowed = ["id", "pid", "first_name", "last_name", "email", "created_at", "updated_at"];
+
+export const routeId = "pid";
 
 export async function createUser(
   first_name: string,
