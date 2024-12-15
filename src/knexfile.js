@@ -5,10 +5,10 @@ const config = {
   client: "better-sqlite3",
   useNullAsDefault: true,
   connection: {
-    filename: "./storage/db.sqlite",
+    filename: "../storage/db.sqlite",
   },
   migrations: {
-    directory: "./src/server/database/knex/migrations",
+    directory: "./server/database/knex/migrations",
   },
 };
 
