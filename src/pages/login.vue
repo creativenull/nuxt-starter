@@ -20,13 +20,20 @@ const submitting = ref(false);
 
 function cleanup() {
   submitting.value = false;
+  formState.email = "";
+  formState.password = "";
 }
 
 async function onSubmitLogin() {
   submitting.value = true;
+
   try {
+    await $fetch("/api/auth/login", { method: "POST", body: formState });
+    await navigateTo("/", { replace: true });
+  } catch (error) {
+    console.log({ error });
     cleanup();
-  } catch (error) {}
+  }
 }
 </script>
 
