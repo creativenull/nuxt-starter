@@ -13,7 +13,6 @@ export default defineEventHandler(async (event) => {
   }
 
   const { email, password } = body.output;
-  console.log({ email, password })
   const isValid = await isUserValidForAuth(email, password);
   if (!isValid) {
     throw createError({
