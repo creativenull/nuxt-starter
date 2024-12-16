@@ -1,5 +1,4 @@
 import { ulid } from "ulid";
-import { makePassword } from "~/server/services/password";
 
 type User = {
   id: number;
@@ -21,32 +20,50 @@ export async function createUser(
   last_name: string,
   email: string,
   plainTextPassword: string,
-) {
+): Promise<User> {
   const db = knex();
-  const password = await makePassword(plainTextPassword);
+  const password = await hashPassword(plainTextPassword);
   const pid = ulid();
   const created_at = new Date();
 
   const result = await db<User>("users")
     .returning(allowed)
-    .insert({ pid, first_name, last_name, email, password, created_at });
+    .insert<User>({ pid, first_name, last_name, email, password, created_at });
 
   return result;
 }
 
-export async function updateUser(id: number, attributes: Partial<User>) {
+export async function updateUser(id: number, attributes: Partial<User>): Promise<User> {
   const db = knex();
   const updated_at = new Date();
 
   return await db<User>("users")
     .returning(allowed)
     .where({ id })
-    .update({ ...attributes, updated_at });
+    .update<User>({ ...attributes, updated_at });
 }
 
-export async function findUser(id: number) {
+export async function findUser(id: number): Promise<User> {
   const db = knex();
-  return await db<User>("users").select(allowed).where({ id }).first();
+
+  return await db<User>("users").select(allowed).where({ id }).first<User>();
+}
+
+export async function findUserByEmail(email: string): Promise<User> {
+  const db = knex();
+
+  return await db<User>("users").select(allowed).where({ email }).first<User>();
+}
+
+export async function isUserValidForAuth(
+  email: string,
+  plainTextPassword: string,
+): Promise<boolean> {
+  const foundUser = await findUserByEmail(email);
+  if (!foundUser) return false;
+
+  const isPasswordValid = await verifyPassword(plainTextPassword, foundUser.password);
+  return isPasswordValid;
 }
 
 export async function deleteUser(id: number): Promise<void> {
