@@ -7,13 +7,9 @@ dotenv.config();
  */
 const config = {
   client: process.env.NUXT_DATABASE_DRIVER,
-  connection: {
-    filename: process.env.NUXT_DATABASE_URL,
-    useNullAsDefault: true,
-  },
-  migrations: {
-    directory: "./src/server/database/knex/migrations",
-  },
+  useNullAsDefault: true,
+  connection: { filename: process.env.NUXT_DATABASE_URL },
+  migrations: { directory: "./src/server/database/knex/migrations" },
 };
 
 export default config;

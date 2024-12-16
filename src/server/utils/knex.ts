@@ -5,6 +5,7 @@ export default function knex() {
 
   return k({
     client: runtimeConfig.databaseDriver,
+    useNullAsDefault: true,
     connection: { filename: runtimeConfig.databaseUrl },
   });
 }
