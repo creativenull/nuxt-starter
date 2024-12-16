@@ -41,8 +41,8 @@ async function onSubmitRegister() {
   submitting.value = true;
 
   try {
-    const response = await $fetch("/api/auth/register", { method: "POST", body: formState });
-    console.log({ response });
+    await $fetch("/api/auth/register", { method: "POST", body: formState });
+    await navigateTo("/", { replace: true });
     cleanup();
   } catch (error) {
     console.log({ error });
