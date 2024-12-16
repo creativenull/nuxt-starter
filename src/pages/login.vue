@@ -2,6 +2,13 @@
 import * as v from "valibot";
 import { LoginSchema } from "~/server/validations/auth/login";
 
+const { loggedIn } = useUserSession();
+onMounted(() => {
+  if (loggedIn.value) {
+    navigateTo("/", { replace: true });
+  }
+});
+
 useHead({ title: "Login" });
 
 const formState = reactive({
