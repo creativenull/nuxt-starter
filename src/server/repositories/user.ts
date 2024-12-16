@@ -1,4 +1,4 @@
-import { knex } from "~/server/database/knex";
+import { ulid } from "ulid";
 import { makePassword } from "~/server/services/password";
 
 type User = {
@@ -22,18 +22,22 @@ export async function createUser(
   email: string,
   plainTextPassword: string,
 ) {
+  const db = knex();
   const password = await makePassword(plainTextPassword);
-  const result = knex<User>("users")
+  const pid = ulid();
+  const result = await db<User>("users")
     .returning(allowed)
-    .insert({ first_name, last_name, email, password });
+    .insert({ pid, first_name, last_name, email, password });
 
   return result;
 }
 
 export async function findUser(id: number) {
-  return knex<User>("users").select(allowed).where({ id }).first();
+  const db = knex();
+  return await db<User>("users").select(allowed).where({ id }).first();
 }
 
 export async function deleteUser(id: number): Promise<void> {
-  knex<User>("users").where({ id }).delete();
+  const db = knex();
+  await db<User>("users").where({ id }).delete();
 }

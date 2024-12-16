@@ -1,8 +1,9 @@
-import { safeParser as validate } from "valibot";
+import * as v from "valibot";
+import { createUser } from "~/server/repositories/user";
 import { RegisterSchema } from "~/server/validations/auth/register";
 
 export default defineEventHandler(async (event) => {
-  const body = await readValidatedBody(event, validate(RegisterSchema));
+  const body = await readValidatedBody(event, v.safeParser(RegisterSchema));
 
   if (!body.success) {
     throw createError({
@@ -10,6 +11,9 @@ export default defineEventHandler(async (event) => {
       data: { ...body.issues },
     });
   }
+
+  const { first_name, last_name, email, password } = body.output;
+  await createUser(first_name, last_name, email, password);
 
   return { succes: true };
 });
