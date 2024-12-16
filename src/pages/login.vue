@@ -1,25 +1,58 @@
 <script setup lang="ts">
+import * as v from "valibot";
+import { LoginSchema } from "~/server/validations/auth/login";
+
 useHead({ title: "Login" });
 
-const formState = reactive({ email: "", password: "" });
+const formState = reactive({
+  email: "",
+  password: "",
+});
 
-function onSubmit() {
-  // $fetch("/api/auth/login", { method: "POST", body: formState })
-  //   .then((res) => console.log("response", res))
-  //   .catch((err) => console.log("error", err));
+const submitting = ref(false);
+
+function cleanup() {
+  submitting.value = false;
+}
+
+async function onSubmitLogin() {
+  submitting.value = true;
+  try {
+    cleanup();
+  } catch (error) {}
 }
 </script>
 
 <template>
-  <UForm :state="formState" class="space-y-4" @submit="onSubmit">
-    <UFormGroup label="Email" name="email">
-      <UInput v-model="formState.email" />
-    </UFormGroup>
+  <div class="container">
+    <UCard>
+      <template #header>
+        <h1>Login</h1>
+      </template>
 
-    <UFormGroup label="Password" name="password">
-      <UInput v-model="formState.password" type="password" />
-    </UFormGroup>
+      <UForm
+        :schema="v.safeParser(LoginSchema)"
+        :state="formState"
+        class="space-y-4"
+        @submit="onSubmitLogin"
+      >
+        <UFormGroup label="Email" name="email" required>
+          <UInput v-model.lazy="formState.email" required />
+        </UFormGroup>
 
-    <UButton type="submit"> Submit </UButton>
-  </UForm>
+        <UFormGroup label="Password" name="password" required>
+          <UInput v-model.lazy="formState.password" type="password" required />
+        </UFormGroup>
+
+        <UButton type="submit" size="lg" :loading="submitting" block> Login </UButton>
+      </UForm>
+    </UCard>
+  </div>
 </template>
+
+<style scoped>
+.container {
+  max-width: 65ch;
+  margin: 2rem auto;
+}
+</style>
