@@ -15,5 +15,7 @@ export default defineEventHandler(async (event) => {
   const { first_name, last_name, email, password } = body.output;
   await createUser(first_name, last_name, email, password);
 
+  await setUserSession(event, { user: { first_name, last_name, email } });
+
   return { succes: true };
 });
