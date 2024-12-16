@@ -10,12 +10,13 @@
     "postinstall": "nuxt prepare",
     "fmt": "prettier --write .",
     "fmt:check": "prettier --check .",
-    "db:migrate": "npx knex --knexfile src/knexfile.js migrate:latest",
-    "db:make": "npx knex --knexfile src/knexfile.js migrate:make"
+    "db:migrate": "npx knex migrate:latest",
+    "db:make": "npx knex migrate:make"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "better-sqlite3": "^11.0.0",
+    "dotenv": "^16.4.7",
     "knex": "^3.1.0",
     "ulid": "^2.3.0",
     "valibot": "^0.42.1",

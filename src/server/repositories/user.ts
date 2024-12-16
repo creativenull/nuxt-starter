@@ -25,11 +25,23 @@ export async function createUser(
   const db = knex();
   const password = await makePassword(plainTextPassword);
   const pid = ulid();
+  const created_at = new Date();
+
   const result = await db<User>("users")
     .returning(allowed)
-    .insert({ pid, first_name, last_name, email, password });
+    .insert({ pid, first_name, last_name, email, password, created_at });
 
   return result;
+}
+
+export async function updateUser(id: number, attributes: Partial<User>) {
+  const db = knex();
+  const updated_at = new Date();
+
+  return await db<User>("users")
+    .returning(allowed)
+    .where({ id })
+    .update({ ...attributes, updated_at });
 }
 
 export async function findUser(id: number) {

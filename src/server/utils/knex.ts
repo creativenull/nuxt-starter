@@ -1,6 +1,10 @@
 import k from "knex";
-import config from "~/knexfile";
 
-export default function () {
-  return k(config);
+export default function knex() {
+  const runtimeConfig = useRuntimeConfig();
+
+  return k({
+    client: runtimeConfig.databaseDriver,
+    connection: { filename: runtimeConfig.databaseUrl },
+  });
 }
