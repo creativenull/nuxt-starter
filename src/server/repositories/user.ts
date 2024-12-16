@@ -59,10 +59,16 @@ export async function isUserValidForAuth(
   email: string,
   plainTextPassword: string,
 ): Promise<boolean> {
-  const foundUser = await findUserByEmail(email);
+  const db = knex();
+  const foundUser = await db<User>("users")
+    .select(["email", "password"])
+    .where({ email })
+    .first<{ email: string; password: string }>();
+
   if (!foundUser) return false;
 
-  const isPasswordValid = await verifyPassword(plainTextPassword, foundUser.password);
+  const isPasswordValid = await verifyPassword(foundUser.password, plainTextPassword);
+
   return isPasswordValid;
 }
 

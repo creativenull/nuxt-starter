@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import * as v from "valibot";
+import { safeParser } from "valibot";
 import { LoginSchema } from "~/server/validations/auth/login";
 
 const { loggedIn } = useUserSession();
@@ -11,11 +11,7 @@ onMounted(() => {
 
 useHead({ title: "Login" });
 
-const formState = reactive({
-  email: "",
-  password: "",
-});
-
+const formState = reactive({ email: "", password: "" });
 const submitting = ref(false);
 
 function cleanup() {
@@ -45,7 +41,7 @@ async function onSubmitLogin() {
       </template>
 
       <UForm
-        :schema="v.safeParser(LoginSchema)"
+        :schema="safeParser(LoginSchema)"
         :state="formState"
         class="space-y-4"
         @submit="onSubmitLogin"
