@@ -24,6 +24,7 @@ export default defineEventHandler(async (event) => {
   const user = await findUserByEmail(email);
   await setUserSession(event, {
     user: {
+      pid: user.pid,
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,

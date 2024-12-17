@@ -13,9 +13,16 @@ export default defineEventHandler(async (event) => {
   }
 
   const { first_name, last_name, email, password } = body.output;
-  await createUser(first_name, last_name, email, password);
+  const newUser = await createUser(first_name, last_name, email, password);
 
-  await setUserSession(event, { user: { first_name, last_name, email } });
+  await setUserSession(event, {
+    user: {
+      pid: newUser.pid,
+      first_name: newUser.first_name,
+      last_name: newUser.last_name,
+      email: newUser.email,
+    },
+  });
 
   return { succes: true };
 });
