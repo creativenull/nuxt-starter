@@ -9,6 +9,6 @@ const { loggedIn, clear } = useUserSession();
     <UButton color="primary" variant="solid" to="/register"> Register </UButton>
   </div>
   <div v-else class="space-x-2">
-    <UButton @click="clear" color="primary" variant="solid"> Logout </UButton>
+    <UButton color="primary" variant="solid" @click="clear"> Logout </UButton>
   </div>
 </template>
