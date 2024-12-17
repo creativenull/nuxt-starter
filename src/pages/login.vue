@@ -3,11 +3,9 @@ import { safeParser } from "valibot";
 import { LoginSchema } from "~/server/validations/auth/login";
 
 const { loggedIn } = useUserSession();
-onMounted(() => {
-  if (loggedIn.value) {
-    navigateTo("/", { replace: true });
-  }
-});
+if (loggedIn.value) {
+  navigateTo("/");
+}
 
 useHead({ title: "Login" });
 

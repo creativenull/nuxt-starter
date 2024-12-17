@@ -5,11 +5,9 @@ import { RegisterSchema } from "~/server/validations/auth/register";
 useHead({ title: "Register" });
 
 const { loggedIn } = useUserSession();
-onMounted(() => {
-  if (loggedIn.value) {
-    navigateTo("/", { replace: true });
-  }
-});
+if (loggedIn.value) {
+  navigateTo("/");
+}
 
 const submitting = ref(false);
 const formState = reactive({
