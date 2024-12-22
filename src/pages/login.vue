@@ -23,7 +23,7 @@ async function onSubmitLogin() {
 
   try {
     await $fetch("/api/auth/login", { method: "POST", body: formState });
-    await navigateTo("/", { replace: true });
+    window.location.href = "/";
   } catch (error) {
     console.log({ error });
     cleanup();

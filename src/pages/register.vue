@@ -40,8 +40,8 @@ async function onSubmitRegister() {
 
   try {
     await $fetch("/api/auth/register", { method: "POST", body: formState });
-    await navigateTo("/", { replace: true });
     cleanup();
+    window.location.href = "/";
   } catch (error) {
     console.log({ error });
     cleanupError();
