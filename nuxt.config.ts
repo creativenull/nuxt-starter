@@ -3,7 +3,6 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-12-02",
   devtools: { enabled: true },
   srcDir: "src/",
-
   runtimeConfig: {
     public: {
       appName: "Nuxt Starter",
@@ -13,6 +12,6 @@ export default defineNuxtConfig({
     databaseDriver: "better-sqlite3",
     databaseUrl: "",
   },
-
   modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/fonts", "@nuxt/image", "nuxt-auth-utils"],
+  experimental: { watcher: "chokidar" },
 });
