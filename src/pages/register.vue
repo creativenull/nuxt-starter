@@ -57,7 +57,7 @@ async function onSubmitRegister() {
         <h1>Register your account</h1>
       </template>
 
-      <UForm ref="form" :state="formState" class="space-y-4" @submit="onSubmitRegister">
+      <UForm ref="form" class="space-y-4" :state="formState" @submit="onSubmitRegister">
         <UFormGroup label="First name" name="first_name" required>
           <UInput v-model.lazy="formState.first_name" required />
         </UFormGroup>

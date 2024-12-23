@@ -12,6 +12,13 @@ export default defineNuxtConfig({
     databaseDriver: "better-sqlite3",
     databaseUrl: "",
   },
-  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/fonts", "@nuxt/image", "nuxt-auth-utils", "nuxt-csurf"],
+  modules: [
+    "@nuxt/eslint",
+    "@nuxt/ui",
+    "@nuxt/fonts",
+    "@nuxt/image",
+    "nuxt-auth-utils",
+    "nuxt-csurf",
+  ],
   experimental: { watcher: "parcel" },
 });

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { Form } from "#ui/types";
 import { FetchError } from "ofetch";
-import { safeParser } from "valibot";
-import { LoginSchema } from "~/server/validations/auth/login";
 
 useHead({ title: "Login" });
 
@@ -39,12 +37,7 @@ async function onSubmitLogin() {
         <h1>Login</h1>
       </template>
 
-      <UForm
-        :schema="safeParser(LoginSchema)"
-        :state="formState"
-        class="space-y-4"
-        @submit="onSubmitLogin"
-      >
+      <UForm class="space-y-4" :state="formState" @submit="onSubmitLogin">
         <UFormGroup label="Email" name="email" required>
           <UInput v-model.lazy="formState.email" required />
         </UFormGroup>
