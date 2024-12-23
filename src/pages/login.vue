@@ -1,15 +1,13 @@
 <script setup lang="ts">
+import type { Form } from "#ui/types";
+import { FetchError } from "ofetch";
 import { safeParser } from "valibot";
 import { LoginSchema } from "~/server/validations/auth/login";
-
-const { loggedIn } = useUserSession();
-if (loggedIn.value) {
-  navigateTo("/");
-}
 
 useHead({ title: "Login" });
 
 const formState = reactive({ email: "", password: "" });
+const form = ref<Form<typeof formState>>();
 const submitting = ref(false);
 
 function cleanup() {
@@ -24,9 +22,12 @@ async function onSubmitLogin() {
   try {
     await $fetch("/api/auth/login", { method: "POST", body: formState });
     window.location.href = "/";
-  } catch (error) {
-    console.log({ error });
+  } catch (e) {
     cleanup();
+
+    if (e instanceof FetchError && e.statusCode === 422) {
+      form.value!.setErrors(getFormValidationErrors(e));
+    }
   }
 }
 </script>
