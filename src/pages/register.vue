@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import * as v from "valibot";
-import { RegisterSchema } from "~/server/validations/auth/register";
+import type { Form } from "#ui/types";
+import { FetchError } from "ofetch";
 
 useHead({ title: "Register" });
-
-const { loggedIn } = useUserSession();
-if (loggedIn.value) {
-  navigateTo("/");
-}
+const { $csrfFetch } = useNuxtApp();
 
 const submitting = ref(false);
 const formState = reactive({
@@ -17,6 +13,8 @@ const formState = reactive({
   password: "",
   password_confirm: "",
 });
+
+const form = ref<Form<typeof formState>>();
 
 function clearForm() {
   formState.first_name = "";
@@ -30,7 +28,7 @@ function cleanup() {
   submitting.value = false;
 }
 
-function cleanupError() {
+function onErrorCleanup() {
   formState.password_confirm = "";
   submitting.value = false;
 }
@@ -39,12 +37,15 @@ async function onSubmitRegister() {
   submitting.value = true;
 
   try {
-    await $fetch("/api/auth/register", { method: "POST", body: formState });
+    await $csrfFetch("/api/auth/register", { method: "POST", body: formState });
     cleanup();
     window.location.href = "/";
-  } catch (error) {
-    console.log({ error });
-    cleanupError();
+  } catch (e) {
+    onErrorCleanup();
+
+    if (e instanceof FetchError && e.statusCode === 422) {
+      form.value!.setErrors(getFormValidationErrors(e));
+    }
   }
 }
 </script>
@@ -56,12 +57,7 @@ async function onSubmitRegister() {
         <h1>Register your account</h1>
       </template>
 
-      <UForm
-        :schema="v.safeParser(RegisterSchema)"
-        :state="formState"
-        class="space-y-4"
-        @submit="onSubmitRegister"
-      >
+      <UForm ref="form" :state="formState" class="space-y-4" @submit="onSubmitRegister">
         <UFormGroup label="First name" name="first_name" required>
           <UInput v-model.lazy="formState.first_name" required />
         </UFormGroup>
