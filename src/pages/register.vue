@@ -11,7 +11,6 @@ const formState = reactive({
   last_name: "",
   email: "",
   password: "",
-  password_confirm: "",
 });
 
 const form = ref<Form<typeof formState>>();
@@ -29,7 +28,6 @@ function cleanup() {
 }
 
 function onErrorCleanup() {
-  formState.password_confirm = "";
   submitting.value = false;
 }
 
@@ -48,6 +46,8 @@ async function onSubmitRegister() {
     }
   }
 }
+
+const showPassword = ref(false);
 </script>
 
 <template>
@@ -59,23 +59,35 @@ async function onSubmitRegister() {
 
       <UForm ref="form" class="space-y-4" :state="formState" @submit="onSubmitRegister">
         <UFormGroup label="First name" name="first_name" required>
-          <UInput v-model.lazy="formState.first_name" required />
+          <UInput v-model.lazy="formState.first_name" required size="md" />
         </UFormGroup>
 
         <UFormGroup label="Last name" name="last_name" required>
-          <UInput v-model.lazy="formState.last_name" required />
+          <UInput v-model.lazy="formState.last_name" required size="md" />
         </UFormGroup>
 
         <UFormGroup label="Email" name="email" required>
-          <UInput v-model.lazy="formState.email" required />
+          <UInput v-model.lazy="formState.email" required size="md" />
         </UFormGroup>
 
         <UFormGroup label="Password" name="password" required>
-          <UInput v-model.lazy="formState.password" type="password" required />
-        </UFormGroup>
-
-        <UFormGroup label="Re-enter password" name="password_confirm" required>
-          <UInput v-model.lazy="formState.password_confirm" type="password" required />
+          <UInput
+            v-model.lazy="formState.password"
+            :type="showPassword ? 'text' : 'password'"
+            required
+            size="md"
+            :ui="{ icon: { trailing: { pointer: '' } } }"
+          >
+            <template #trailing>
+              <UButton
+                @click="showPassword = !showPassword"
+                :padded="false"
+                color="gray"
+                variant="link"
+                :icon="showPassword ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'"
+              />
+            </template>
+          </UInput>
         </UFormGroup>
 
         <UButton type="submit" size="lg" :loading="submitting" block>Register</UButton>
