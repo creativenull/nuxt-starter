@@ -1,6 +1,6 @@
 import * as v from "valibot";
-import { createUser } from "~/server/repositories/user";
-import { RegisterSchema } from "~/server/validations/auth/register";
+import { createUser } from "~~/server/repositories/user";
+import { RegisterSchema } from "~~/server/validations/auth/register";
 
 export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, v.safeParserAsync(RegisterSchema));
@@ -22,6 +22,7 @@ export default defineEventHandler(async (event) => {
       last_name: newUser.last_name,
       email: newUser.email,
     },
+    loggedInAt: new Date(),
   });
 
   return { succes: true };

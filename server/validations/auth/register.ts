@@ -1,6 +1,6 @@
 import * as v from "valibot";
 import capitalize from "lodash.capitalize";
-import { findUserByEmail } from "~/server/repositories/user";
+import { findUserByEmail } from "~~/server/repositories/user";
 
 export const RegisterSchema = v.objectAsync({
   first_name: v.pipe(

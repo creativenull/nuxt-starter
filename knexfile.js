@@ -9,7 +9,7 @@ const config = {
   client: process.env.NUXT_DATABASE_DRIVER,
   useNullAsDefault: true,
   connection: { filename: process.env.NUXT_DATABASE_URL },
-  migrations: { directory: "./src/server/database/migrations" },
+  migrations: { directory: "./server/database/migrations" },
 };
 
 export default config;

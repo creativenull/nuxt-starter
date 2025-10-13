@@ -1,6 +1,6 @@
 import { safeParser } from "valibot";
-import { findUserByEmail, isUserValidForAuth } from "~/server/repositories/user";
-import { LoginSchema } from "~/server/validations/auth/login";
+import { findUserByEmail, isUserValidForAuth } from "~~/server/repositories/user";
+import { LoginSchema } from "~~/server/validations/auth/login";
 
 export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, safeParser(LoginSchema));

@@ -45,11 +45,21 @@ const showPassword = ref(false);
         </UFormField>
 
         <UFormField label="Password" name="password" required>
-          <UInput v-model.lazy="formState.password" :type="showPassword ? 'text' : 'password'" required size="xl"
-            class="w-full">
+          <UInput
+            v-model.lazy="formState.password"
+            :type="showPassword ? 'text' : 'password'"
+            required
+            size="xl"
+            class="w-full"
+          >
             <template #trailing>
-              <UButton @click="showPassword = !showPassword" :padded="false" color="neutral" variant="link"
-                :icon="showPassword ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'" />
+              <UButton
+                @click="showPassword = !showPassword"
+                :padded="false"
+                color="neutral"
+                variant="link"
+                :icon="showPassword ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'"
+              />
             </template>
           </UInput>
         </UFormField>

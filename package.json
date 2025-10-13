@@ -8,9 +8,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "fmt": "prettier --write .",
+    "fmt": "prettier --write app server",
     "fmt:check": "prettier --check .",
-    "lint": "eslint ./src",
+    "lint": "eslint app server",
     "db:migrate": "npx knex migrate:latest",
     "db:make": "npx knex migrate:make"
   },
