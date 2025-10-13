@@ -21,4 +21,5 @@ export default defineNuxtConfig({
     "nuxt-csurf",
   ],
   experimental: { watcher: "parcel" },
+  css: ["~/assets/css/main.css"],
 });

@@ -28,25 +28,33 @@ async function onSubmitLogin() {
     }
   }
 }
+
+const showPassword = ref(false);
 </script>
 
 <template>
   <div class="container">
     <UCard>
       <template #header>
-        <h1>Login</h1>
+        <h1 class="text-3xl font-medium">Login</h1>
       </template>
 
       <UForm class="space-y-4" :state="formState" @submit="onSubmitLogin">
-        <UFormGroup label="Email" name="email" required>
-          <UInput v-model.lazy="formState.email" required />
-        </UFormGroup>
+        <UFormField label="Email" name="email" required>
+          <UInput v-model.lazy="formState.email" required size="xl" class="w-full" />
+        </UFormField>
 
-        <UFormGroup label="Password" name="password" required>
-          <UInput v-model.lazy="formState.password" type="password" required />
-        </UFormGroup>
+        <UFormField label="Password" name="password" required>
+          <UInput v-model.lazy="formState.password" :type="showPassword ? 'text' : 'password'" required size="xl"
+            class="w-full">
+            <template #trailing>
+              <UButton @click="showPassword = !showPassword" :padded="false" color="neutral" variant="link"
+                :icon="showPassword ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'" />
+            </template>
+          </UInput>
+        </UFormField>
 
-        <UButton type="submit" size="lg" :loading="submitting" block> Login </UButton>
+        <UButton type="submit" size="xl" :loading="submitting" block> Login </UButton>
       </UForm>
     </UCard>
   </div>

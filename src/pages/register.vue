@@ -54,43 +54,33 @@ const showPassword = ref(false);
   <div class="container">
     <UCard>
       <template #header>
-        <h1>Register your account</h1>
+        <h1 class="text-3xl font-medium">Register your account</h1>
       </template>
 
       <UForm ref="form" class="space-y-4" :state="formState" @submit="onSubmitRegister">
-        <UFormGroup label="First name" name="first_name" required>
-          <UInput v-model.lazy="formState.first_name" required size="md" />
-        </UFormGroup>
+        <UFormField label="First name" name="first_name" required>
+          <UInput v-model.lazy="formState.first_name" required size="xl" class="w-full" />
+        </UFormField>
 
-        <UFormGroup label="Last name" name="last_name" required>
-          <UInput v-model.lazy="formState.last_name" required size="md" />
-        </UFormGroup>
+        <UFormField label="Last name" name="last_name" required>
+          <UInput v-model.lazy="formState.last_name" required size="xl" class="w-full" />
+        </UFormField>
 
-        <UFormGroup label="Email" name="email" required>
-          <UInput v-model.lazy="formState.email" required size="md" />
-        </UFormGroup>
+        <UFormField label="Email" name="email" required>
+          <UInput v-model.lazy="formState.email" required size="xl" class="w-full" />
+        </UFormField>
 
-        <UFormGroup label="Password" name="password" required>
-          <UInput
-            v-model.lazy="formState.password"
-            :type="showPassword ? 'text' : 'password'"
-            required
-            size="md"
-            :ui="{ icon: { trailing: { pointer: '' } } }"
-          >
+        <UFormField label="Password" name="password" required>
+          <UInput v-model.lazy="formState.password" :type="showPassword ? 'text' : 'password'" required size="xl"
+            class="w-full">
             <template #trailing>
-              <UButton
-                @click="showPassword = !showPassword"
-                :padded="false"
-                color="gray"
-                variant="link"
-                :icon="showPassword ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'"
-              />
+              <UButton @click="showPassword = !showPassword" :padded="false" color="neutral" variant="link"
+                :icon="showPassword ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'" />
             </template>
           </UInput>
-        </UFormGroup>
+        </UFormField>
 
-        <UButton type="submit" size="lg" :loading="submitting" block>Register</UButton>
+        <UButton type="submit" size="xl" :loading="submitting" block>Register</UButton>
       </UForm>
     </UCard>
   </div>
