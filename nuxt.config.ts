@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2025-10-01",
+  compatibilityDate: "2025-12-01",
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
@@ -11,14 +11,6 @@ export default defineNuxtConfig({
     databaseDriver: "better-sqlite3",
     databaseUrl: "",
   },
-  modules: [
-    "@nuxt/eslint",
-    "@nuxt/ui",
-    "@nuxt/fonts",
-    "@nuxt/image",
-    "nuxt-auth-utils",
-    "nuxt-csurf",
-  ],
-  experimental: { watcher: "parcel" },
+  modules: ["@nuxt/ui", "@nuxt/fonts", "@nuxt/image", "nuxt-auth-utils", "nuxt-csurf"],
   css: ["~/assets/css/main.css"],
 });
