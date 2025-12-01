@@ -8,7 +8,6 @@ export default defineNuxtConfig({
       appUrl: "http://localhost:3000",
     },
     bcryptSaltRounds: 12,
-    databaseDriver: "better-sqlite3",
     databaseUrl: "",
   },
   modules: ["@nuxt/ui", "@nuxt/fonts", "@nuxt/image", "nuxt-auth-utils", "nuxt-csurf"],
