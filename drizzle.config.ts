@@ -3,8 +3,8 @@ import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
   dialect: "sqlite",
-  schema: "./db/schema.ts",
-  out: "./db/migrations",
+  schema: "./database/schema.ts",
+  out: "./database/migrations",
   dbCredentials: {
     url: process.env.NUXT_DATABASE_URL!,
   },
