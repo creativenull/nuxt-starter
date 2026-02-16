@@ -5,8 +5,7 @@ useHead({ title: "Register" });
 
 const submitting = ref(false);
 const formState = reactive({
-  first_name: "",
-  last_name: "",
+  name: "",
   email: "",
   password: "",
 });
@@ -24,12 +23,8 @@ const showPassword = ref(false);
       </template>
 
       <UForm ref="form" class="space-y-4" :state="formState">
-        <UFormField label="First name" name="first_name" required>
-          <UInput v-model.lazy="formState.first_name" required size="xl" class="w-full" />
-        </UFormField>
-
-        <UFormField label="Last name" name="last_name" required>
-          <UInput v-model.lazy="formState.last_name" required size="xl" class="w-full" />
+        <UFormField label="Last name" name="name" required>
+          <UInput v-model.lazy="formState.name" required size="xl" class="w-full" />
         </UFormField>
 
         <UFormField label="Email" name="email" required>
