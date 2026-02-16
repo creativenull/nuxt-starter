@@ -20,6 +20,7 @@
     "dotenv": "^17.3.1",
     "drizzle-orm": "^0.45.1",
     "lodash.capitalize": "^4.2.1",
+    "tailwindcss": "^4.1.18",
     "ulid": "^3.0.2",
     "valibot": "^1.2.0",
     "vue": "^3.5.28",
