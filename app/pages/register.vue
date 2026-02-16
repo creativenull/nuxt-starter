@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import type { FetchError } from "ofetch";
 import type { Form } from "#ui/types";
 import { RegisterFormSchema } from "#shared/forms/register-schema";
 
 useHead({ title: "Register" });
 
+const { $csrfFetch } = useNuxtApp();
+const toast = useToast();
 const submitting = ref(false);
 const formState = reactive({
   name: "",
@@ -16,7 +19,25 @@ const form = ref<Form<typeof formState>>();
 const showPassword = ref(false);
 
 async function onSubmit() {
-  //
+  try {
+    const result = await $csrfFetch("/api/register", { method: "POST", body: { ...formState } });
+    if (result) {
+      toast.add({
+        title: "User created successfully",
+        description: "You can now login with your credentials",
+      });
+
+      navigateTo("/login");
+    }
+  } catch (e) {
+    if ((e as FetchError).status === 400) {
+      toast.add({
+        title: "Error",
+        description: (e as FetchError).data.message,
+        color: "error",
+      });
+    }
+  }
 }
 </script>
 
@@ -27,7 +48,13 @@ async function onSubmit() {
         <h1 class="text-3xl font-medium">Register your account</h1>
       </template>
 
-      <UForm :schema="RegisterFormSchema" ref="form" class="space-y-4" :state="formState" @submit="onSubmit">
+      <UForm
+        :schema="RegisterFormSchema"
+        ref="form"
+        class="space-y-4"
+        :state="formState"
+        @submit="onSubmit"
+      >
         <UFormField label="Name" name="name" required>
           <UInput v-model.lazy="formState.name" required size="xl" class="w-full" />
         </UFormField>
