@@ -32,12 +32,17 @@ export async function setUser(name: string, email: string, plainTextPassword: st
   const salt = await bcrypt.genSalt(saltRounds);
   const password = await bcrypt.hash(plainTextPassword, salt);
 
+  const existingUser = await getUserByEmail(email);
+  if (existingUser) {
+    throw new Error("User already exists");
+  }
+
   const user = await db
     .insert(usersTable)
     .values({ name, email, password })
     .returning({ id: usersTable.id, name: usersTable.name, email: usersTable.email });
 
-  return user;
+  return user && user[0] ? user[0] : null;
 }
 
 export async function deleteUser(id: number) {
