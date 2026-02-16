@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Form } from "#ui/types";
+import { RegisterFormSchema } from "#shared/forms/register-schema";
 
 useHead({ title: "Register" });
 
@@ -13,6 +14,10 @@ const formState = reactive({
 const form = ref<Form<typeof formState>>();
 
 const showPassword = ref(false);
+
+async function onSubmit() {
+  //
+}
 </script>
 
 <template>
@@ -22,8 +27,8 @@ const showPassword = ref(false);
         <h1 class="text-3xl font-medium">Register your account</h1>
       </template>
 
-      <UForm ref="form" class="space-y-4" :state="formState">
-        <UFormField label="Last name" name="name" required>
+      <UForm :schema="RegisterFormSchema" ref="form" class="space-y-4" :state="formState" @submit="onSubmit">
+        <UFormField label="Name" name="name" required>
           <UInput v-model.lazy="formState.name" required size="xl" class="w-full" />
         </UFormField>
 
