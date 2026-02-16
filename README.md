@@ -3,6 +3,6 @@
 Just a simple nuxt starter template for me to get started with.
 
 ```
-npm ci
-npm run db:migrate
+pnpm install
+pnpm run db:push
 ```
